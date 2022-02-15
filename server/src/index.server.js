@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 
 mongoose.connect(
-    `mongodb+srv://Akhil:luci@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+    `mongodb+srv://Akhil:<password>@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
