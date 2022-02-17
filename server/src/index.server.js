@@ -1,29 +1,36 @@
-const express = require('express');
+
 const env = require('dotenv')
+env.config()
+const express = require('express');
 const app = express();
-const bodyParsers = require('body-parser');
+
 const mongoose = require('mongoose');
 
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
 
 mongoose.connect(
-    `mongodb+srv://Akhil:luci@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        
+
     }
 ).then(() => {
     console.log('Database Connected');
 });
 
+
 env.config();
 
-app.use(bodyParsers());
-app.use('/api',userRoutes);
+app.use(express.json());
+app.use('/api', authRoutes);
+app.use('/api', adminRoutes);
+app.use('/api', categoryRoutes);
 
 
 
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
