@@ -11,7 +11,11 @@ const adminRoutes = require('./routes/admin/auth');
 const categoryRoutes = require('./routes/category');
 
 mongoose.connect(
+<<<<<<< HEAD
     `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+=======
+    `mongodb+srv://Akhil:<password>@cluster0.xguyy.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+>>>>>>> a18dfbc1006ccac7f92eebfc06c5f70ee3d2fb54
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
