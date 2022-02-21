@@ -16,7 +16,7 @@ function createCategories(categories, parentId = null) {
             _id: cate._id,
             name: cate.name,
             slug: cate.slug,
-            children: createCategories(categories,cate._id)
+            children: createCategories(categories, cate._id)
         });
     }
 
@@ -25,9 +25,14 @@ function createCategories(categories, parentId = null) {
 };
 
 exports.addCategory = (req, res) => {
+
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
+    }
+
+    if (req.file) {
+        categoryObj.categoryImage = process.env.API + '/public/' + req.file.filename;
     }
 
     if (req.body.parentId) {
@@ -36,9 +41,13 @@ exports.addCategory = (req, res) => {
 
     const cat = new Category(categoryObj);
     cat.save((error, category) => {
-        if (error) return res.status(400).json({ error });
+        if (error) return res.status(400).json({
+            error
+        });
         if (category) {
-            return res.status(201).json({ category });
+            return res.status(201).json({
+                category
+            });
         }
     });
 }
@@ -46,13 +55,17 @@ exports.addCategory = (req, res) => {
 exports.getCategories = (req, res) => {
     Category.find({})
         .exec((error, categories) => {
-            if (error) return res.status(400).json({ error });
+            if (error) return res.status(400).json({
+                error
+            });
 
             if (categories) {
 
                 const categoryList = createCategories(categories);
 
-                res.status(200).json({ categoryList });
+                res.status(200).json({
+                    categoryList
+                });
             }
         });
 }

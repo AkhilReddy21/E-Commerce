@@ -6,14 +6,19 @@ const categorySchema = new mongoose.Schema({
         trim: true
     },
     slug: {
-        type: String, 
+        type: String,
         required: true,
         unique: true
+    },
+    categoryImage: {
+        type: String
     },
     parentId: {
         type: String
     }
 
-},{timestamps: true});
+}, {
+    timestamps: true
+});
 
 module.exports = mongoose.model('Category', categorySchema);
