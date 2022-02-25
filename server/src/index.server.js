@@ -11,6 +11,8 @@ const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
 const path = require('path');
+const cors = require('cors');
+
 
 mongoose.connect(
 
@@ -28,6 +30,7 @@ mongoose.connect(
 
 env.config();
 
+app.use(cors());
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', authRoutes);
